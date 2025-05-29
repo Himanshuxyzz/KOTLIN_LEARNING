@@ -1,0 +1,32 @@
+# Compiled class files
+*.class
+
+# Jar files
+*.jar
+
+# Log files
+*.log
+
+# Kotlin compiler output
+out/
+build/
+
+# IntelliJ IDEA files
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Eclipse files
+.classpath
+.project
+.settings/
+
+# Gradle files
+.gradle/
+
+# Mac OS files
+.DS_Store
+
+# Node.js (for the compile script)
+node_modules/ 

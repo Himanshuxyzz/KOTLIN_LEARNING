@@ -181,6 +181,10 @@
 
 // Classes
 
+// we dont need to create a new instance of the class when using the class in code this is very
+// different approach from other oops languages where we needed to create the instance of class
+// using the new ClassName() kotlin has removed this hassle
+
 class Person(val name: String, var age: Int) {
     fun introduce() {
         println("Hi i am $name and my age is $age")
@@ -231,8 +235,86 @@ class Dog(name: String) : Animal(name) {
 
 // # INTERFACES
 
+// in my understanding it's kinda blueprint which we can make and then apply in class to follow the
+// blueprint in my understanding
+
+interface Shape {
+    // i'm only declaring but not defining and what will be it's purpose
+    // we are abstracting this function and later use this function in other classes by over riding
+    // the function
+    fun draw()
+}
+
+class Triangle : Shape {
+    override fun draw() {
+        println("Drawing A Triangle!")
+    }
+}
+
+// # DATA CLASSES
+
+// in my understanding it kinda worked like a normal object in which we cann access the keys of the
+// object but here we are passing the values at the time of using the class
+
+data class User(val username: String, val email: String) {
+    fun displayInfo() {
+        println("username = $username")
+    }
+}
+
+// # object
+
+// A singleton - only one instance ever exists
+// Instantiated immediately when loaded, not when called
+
+object DatabaseConfig {
+    fun connect() {
+        println("Database is connected!")
+    }
+}
+
+// # Access Modifiers
+
+class PublicClass {
+    val publicInfo: String = "Public info" // this will be publicly available
+    private val privateInfo: String =
+            "Private info" // this is private and will not be available outside the class
+
+    // the private values are only accessible if we expose them from the function just like in below
+    fun showPrivateInfo(): String {
+        return privateInfo
+    }
+}
+
+// # INTERNAL CLASS
+
+// acc to my understanding this will be only accsessible inside this particulat module or file in
+// other file i cant access the values
+
+internal class InternalClass {
+    internal val internalInfo: String = "Internal Info"
+}
+
+// # PROTECTED
+// in my understanding the protected values are only accessible inside the extended or derived class
+// it will not accessible outside the class
+open class Himanshu {
+    val name: String = "Himanshu"
+    val age: Int = 25
+    val weight: Int = 70
+    protected val wallet_balance: Double = 100.00
+}
+
+class personalInfo : Himanshu() {
+    fun show() {
+        println("Name:- $name")
+        println("Age:- $age")
+        println("Weight:- $weight")
+    }
+}
+
 fun main() {
-    // Classes
+    // # Classes
     // val result = Person("Himanshu", 24)
     // result.introduce()
     // println("$result")
@@ -245,10 +327,43 @@ fun main() {
 
     // println(cylinder.volume())
 
-    val dog = Dog("Tommy")
-    dog.makeSound()
+    // val dog = Dog("Tommy")
+    // dog.makeSound()
 
-    val cat = Animal("Pussy")
+    // val cat = Animal("Pussy")
 
-    cat.makeSound()
+    // cat.makeSound()
+
+    // # Interfaces
+
+    // val triangle = Triangle()
+    // triangle.draw()
+
+    //  # Data Classes
+
+    // val user = User("Himanshu", "Himanshuxyzz@gmail.com")
+    // user.displayInfo()
+    // println(user.username)
+
+    // # Object
+
+    // DatabaseConfig.connect()
+
+    // # Access Modifiers
+
+    // val publicObj = PublicClass()
+    // println(publicObj.showPrivateInfo())
+
+    // # Internal
+
+    // val internalObject = InternalClass()
+    // println(internalObject.internalInfo)
+
+    // val personal_info = personalInfo()
+    // personal_info.show()
+    // println( personal_info.wallet_balance)
+    // this will throw error -> Cannot access
+    // 'wallet_balance': it is protected in
+    // 'personalInfo'
+
 }

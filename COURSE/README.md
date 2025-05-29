@@ -1,170 +1,100 @@
-# Kotlin Compiler Script Documentation
+# Kotlin Learning Project
 
-This Node.js script automates the process of compiling and running Kotlin files, with automatic cleanup.
+This repository contains Kotlin code examples for learning the language basics.
 
 ## Table of Contents
 
-- [Module Imports](#module-imports)
-- [File Configuration](#file-configuration)
-- [Main Execution Block](#main-execution-block)
-- [Usage](#usage)
+- [Running Kotlin Files](#running-kotlin-files)
+- [Code Structure](#code-structure)
+- [Key Concepts](#key-concepts)
+- [Kotlin vs JavaScript Comparison](#kotlin-vs-javascript-comparison)
 
-## Module Imports
+## Running Kotlin Files
 
-### Child Process Module
-
-```javascript
-const { execSync } = require("child_process");
-```
-
-- Imports `execSync` from Node's built-in `child_process` module
-- Used to execute shell commands synchronously from Node.js
-- "Synchronous" means it waits for command completion before moving on
-
-### Path Module
-
-```javascript
-const path = require("path");
-```
-
-- Imports Node's `path` module
-- Handles file paths consistently across different operating systems
-- Helps avoid path-related issues between Windows/Mac/Linux
-
-### File System Module
-
-```javascript
-const fs = require("fs");
-```
-
-- Imports Node's `fs` (File System) module
-- Provides functions for file operations
-- Used for checking if files exist and deleting files
-
-## File Configuration
-
-### Command Line Argument Handling
-
-```javascript
-const file = process.argv[2] || "Main.kt";
-```
-
-- `process.argv` is an array containing:
-  - Index 0: Node executable path
-  - Index 1: Current script path
-  - Index 2: First user-provided argument
-- Falls back to "Main.kt" if no argument provided
-
-### Path Resolution
-
-```javascript
-const kotlinFile = path.resolve("src/", file);
-```
-
-- Creates absolute path to Kotlin file
-- Looks in `src/` directory
-- Handles path separators automatically
-
-### Output File Configuration
-
-```javascript
-const jarFile = "Main.jar";
-```
-
-- Defines name for the compiled JAR file
-
-### Path Formatting
-
-```javascript
-const quotedKotlinFile = `"${kotlinFile}.kt"`;
-const quotedJarFile = `"${jarFile}.jar"`;
-```
-
-- Adds proper file extensions
-- Wraps paths in quotes to handle spaces
-- Prepares paths for command-line usage
-
-## Main Execution Block
-
-### Try Block
-
-```javascript
-try {
-  execSync(`kotlinc ${quotedKotlinFile} -include-runtime -d ${quotedJarFile}`, {
-    stdio: "inherit",
-  });
-  execSync(`java -jar ${quotedJarFile}`, {
-    stdio: "inherit",
-  });
-}
-```
-
-- Compiles Kotlin file:
-  - Uses `kotlinc` compiler
-  - `-include-runtime`: Bundles Kotlin runtime
-  - `-d`: Specifies output JAR
-- Runs compiled JAR using Java
-- `stdio: "inherit"`: Shows output in terminal
-
-### Error Handling
-
-```javascript
-catch (error) {
-  console.log(error);
-}
-```
-
-- Catches any errors during compilation or execution
-- Logs errors to console
-- Prevents script from crashing
-
-### Cleanup
-
-```javascript
-finally {
-  if (fs.existsSync(jarFile)) {
-    fs.unlinkSync(jarFile);
-  }
-}
-```
-
-- Always runs, regardless of success/failure
-- Checks if JAR file exists
-- Deletes JAR file if found
-- Keeps workspace clean
-
-## Usage
-
-Run the script using either:
+### Option 1: Using Kotlin Compiler Directly
 
 ```bash
-node compile-run-clean.js              # Uses default Main.kt
-node compile-run-clean.js YourFile     # Uses YourFile.kt
+# Compile a Kotlin file
+kotlinc src/Basic.kt -include-runtime -d Basic.jar
+
+# Run the compiled JAR
+java -jar Basic.jar
 ```
 
-The script performs three main operations in sequence:
+### Option 2: Using the Included Script
 
-1. Compiles Kotlin source to JAR
-2. Executes the JAR file
-3. Cleans up by removing the JAR
+```bash
+# Run the default file (Main.kt)
+node compile-run-clean.js
 
-This automation simplifies the Kotlin development workflow by combining compile, run, and cleanup steps into a single command.
+# Run a specific file (e.g., Basic.kt)
+node compile-run-clean.js Basic
+```
+
+## Code Structure
+
+The `src/Basic.kt` file contains examples of:
+
+- Variables and data types
+- Functions
+- Loops and control flow
+- Classes and OOP concepts
+- Interfaces
+- Data classes
+- Object declarations (singletons)
+- Access modifiers
+
+## Key Concepts
+
+### Data Classes
+
+```kotlin
+data class User(val username: String, val email: String) {
+    fun displayInfo() {
+        println("username = $username")
+    }
+}
+```
+
+- Purpose: Store and operate on data
+- Automatically generated: toString(), equals(), hashCode(), copy()
+- Similar to JavaScript classes used as data containers
+
+### Object Declarations
+
+```kotlin
+object DatabaseConfig {
+    fun connect() {
+        println("Database is connected!")
+    }
+}
+```
+
+- Purpose: Create singletons (single instances)
+- Instantiated automatically when loaded
+- Accessed directly without instantiation: `DatabaseConfig.connect()`
+- Similar to a JavaScript object literal, but with guaranteed single instance
+
+### Access Modifiers
+
+- `public`: Default, accessible everywhere
+- `private`: Only within the class
+- `protected`: Within the class and subclasses
+- `internal`: Within the same module
+
+## Kotlin vs JavaScript Comparison
+
+| Kotlin Concept | JavaScript Equivalent                   |
+| -------------- | --------------------------------------- |
+| data class     | Class with manually implemented methods |
+| object         | Singleton pattern or object literal     |
+| val            | const                                   |
+| var            | let/var                                 |
+| Fun interfaces | Function types                          |
+| Null safety    | Optional chaining (?.)                  |
 
 ## Requirements
 
-- Node.js installed
 - Kotlin compiler (`kotlinc`) installed and available in PATH
 - Java Runtime Environment (JRE) installed
-
-## Directory Structure
-
-```
-project/
-├── src/
-│   └── Main.kt (or your Kotlin files)
-└── compile-run-clean.js
-```
-
-## Note
-
-Make sure your Kotlin files are placed in the `src` directory relative to where the script is run.
+- Node.js (for running the compile script)
