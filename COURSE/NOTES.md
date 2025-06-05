@@ -37,4 +37,4 @@ e.g -> java -jar main.jar -> the output will be "Hello World"
 
 1. In kotlin the values are defined followed by the var variable_name = value
 
-VIDEO LINK - LINK[https://www.youtube.com/watch?v=mlEkJShasI0] at time [1:33:20]
+VIDEO LINK - LINK[https://www.youtube.com/watch?v=mlEkJShasI0] at time [2:20:50]

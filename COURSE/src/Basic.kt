@@ -366,4 +366,144 @@ fun main() {
     // 'wallet_balance': it is protected in
     // 'personalInfo'
 
+    //  # COLLECTIONS
+
+    // listof are immutables
+    // mutableListOf lists are mutable
+
+    // val list1 = listOf("Apple", "Banana", "Water Me Alien", "Kiwi", 1, 2, 3, 4, true, false)
+    // println(list1[list1.size - 1])
+
+    // val list2 = mutableListOf("Dog", "Cat", 1, 2)
+    // list2.add("Elephant")
+    // list2.remove("Dog")
+    // list2.add(4)
+    // println(list2)
+
+    //  # SET
+
+    // val uniqueAnimals = setOf("Cat", "Cat") // non editable
+    // println(uniqueAnimals)
+
+    // val editableAnimals = mutableSetOf("Cat", "Cat") // editable
+    // editableAnimals.add("Dog")
+    // println(editableAnimals)
+
+    //  # MAPS
+
+    // val map = mapOf(1 to "One", 2 to "Two") // immutable
+    // println(map)
+
+    // val editableMap = mutableMapOf("Cat" to "Animal")
+    // editableMap["Dog"] = "Animal"
+    // editableMap["Cat"] = "Evil"
+    // println(editableMap)
+
+    // Loops
+
+    // val mutableList = mutableListOf("red", "green", "blue")
+
+    // for (item in mutableList) {
+    //     println(item)
+    // }
+
+    // val mutableMap = mutableMapOf("cat" to "Meow", "dog" to "Bhowwww")
+    // for (item in mutableMap) {
+    //     println(item.value)
+    // }
+
+    // for ((key, valye) in mutableMap) {
+    //     println("{key:$key,value:$valye}")
+    // }
+
+    //  # GENERICS
+
+    fun <T> printElements(elements: List<T>) {
+        for (element in elements) {
+            println(element)
+        }
+    }
+
+    printElements(listOf("red", "dog", "blue", "cat")) // string
+    printElements(listOf(1, 2, 3, 4, 5))
+
+    class Box<T>(private var content: T) {
+        fun getContent(): T {
+            return content
+        }
+    }
+
+    val box1 = Box(123)
+    val box2 = Box("hello!")
+
+    // println(box1.getContent())
+    // println(box2.getContent())
+    //  # NULL SAFETY
+
+    var name: String? = "John wick"
+    // name = null // will throw error that Null can not be a value of a non - null type String
+    // println(name)
+
+    //  # SAFE CALLLS
+
+    var length: Int? = name?.length
+    // println(length)
+
+    //  # ELVIS operator
+
+    val lengthExists: Int = name?.length ?: 0
+    // println(lengthExists)
+
+    //  # SAFE CAST
+
+    val ob: Any = "I'm a string"
+    // val obj2: String? = ob // this will throw error
+
+    val obj2: String? = ob as? String // this will throw error
+
+    // println(obj2)
+
+    //  # EXCEPTION HANDLING
+
+    // try {
+    //     // val result = 10 / 0 // Arithmetic error
+
+    //     val result = "String".toInt()
+    // } catch (e: Exception) { // we can also use the Exception type if we dont know
+    //     // what type of error can come , also you use can Any
+    //     println("Caught an error: ${e.message}")
+    // } catch (e: NumberFormatException) {
+    //     // println("Caught an error: ${e.message}")
+    //     throw NumberFormatException("Something wrong happend")
+    // } finally {
+    //     println("I will run everytime!")
+    // }
+
+    //  # EXTENSION FUNCTIONS -> can be used to extend the default functions methods
+
+    fun String.isPalindrome(): String {
+        return this.reversed()
+    }
+
+    // println("naman".isPalindrome())
+
+    //  # LAMBDA function - these are expressions which can be assigned to variables
+
+    // void is equivalent of Unit in kotlin
+    val greet: (String) -> Unit = { name -> println("Hello $name") }
+    // greet("Himanshu")
+
+    // type safe lambda
+
+    val greet2: (String) -> String = { name -> "Hello $name" }
+
+    // println(greet2("Himanshu"))
+
+    // high order function
+    val numbers = listOf(1, 2, 3, 4, 5)
+    val doubled = numbers.map { it * 2 }
+
+    // println(doubled)
+
+    // # FILE IO METHODS
 }
