@@ -18,7 +18,7 @@ fun main() {
         }
     }
 
-    fun readFile(fileName: String) {
+    fun readContent(fileName: String) {
         try {
             val content = File(fileName).readText()
             println("Reading Content from $fileName -> $content")
@@ -54,5 +54,5 @@ fun main() {
 
     writeFile("Testing-IO.txt", "Testing 1...2.....3.....")
 
-    readFile("Testing-IO.txt")
+    readContent("Testing-IO.txt")
 }
