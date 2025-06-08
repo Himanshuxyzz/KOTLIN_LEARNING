@@ -34,7 +34,7 @@ fun main() {
 
     // Parent file path
 
-    var parentPath = File("Testing-IO.txt").parent
+    var parentPath = File("Testing-IO.txt").absoluteFile.parent
     println(parentPath)
 
     //  If file exists or not
